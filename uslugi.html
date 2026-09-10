@@ -109,8 +109,8 @@
         <h2>Подбор автомобиля</h2>
         <span class="chip">Входит в сделку</span>
         <p class="small muted">От двух дней до недели — зависит от того, насколько редкую конфигурацию вы ищете.</p>
-        <figure class="cut" data-reveal="tilt">
-          <img src="assets/img/cut/podbor.webp" width="720" height="956" alt="Специалист по подбору показывает клиенту найденные варианты" loading="lazy" decoding="async">
+        <figure class="cut" data-reveal="tilt" style="--cut-ar:0.354;--cut-max:11.5rem">
+          <img src="assets/img/cut/podbor.webp" width="319" height="900" alt="Специалист по подбору показывает клиенту найденные варианты" loading="lazy" decoding="async">
           <figcaption class="cut__tag">5–8 живых вариантов</figcaption>
         </figure>
       </div>
@@ -141,8 +141,8 @@
         <h2>Проверка и предпродажная подготовка</h2>
         <span class="chip chip--blue">Отчёт в тот же день</span>
         <p class="small muted">Свою машину проверяем бесплатно. Чужую, если покупаете за наличные, — как отдельную услугу.</p>
-        <figure class="cut" data-reveal="tilt-r">
-          <img src="assets/img/cut/proverka.webp" width="1040" height="1380" alt="Техник с толщиномером проверяет кузов автомобиля перед покупкой" loading="lazy" decoding="async">
+        <figure class="cut" data-reveal="tilt-r" style="--cut-ar:0.562;--cut-max:14rem">
+          <img src="assets/img/cut/proverka.webp" width="562" height="1000" alt="Техник с толщиномером проверяет кузов автомобиля перед покупкой" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Толщиномер, сканер, подъёмник</figcaption>
         </figure>
       </div>
@@ -176,8 +176,8 @@
         <h2>Аренда автомобиля с правом выкупа</h2>
         <span class="chip chip--mint">Решение за 1 день</span>
         <p class="small muted">Основная услуга, ради которой всё остальное и существует.</p>
-        <figure class="cut" data-reveal="tilt">
-          <img src="assets/img/cut/kluchi.webp" width="1200" height="1200" alt="Передача ключей после подписания договора аренды с правом выкупа" loading="lazy" decoding="async">
+        <figure class="cut" data-reveal="tilt" style="--cut-ar:1.215;--cut-max:21.5rem">
+          <img src="assets/img/cut/kluchi.webp" width="1000" height="823" alt="Передача ключей после подписания договора аренды с правом выкупа" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Ключи — в день подписания</figcaption>
         </figure>
       </div>
@@ -622,10 +622,18 @@
     <path class="road__ghost" fill="none"/>
     <path class="road__trail" fill="none"/>
     <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+      <g class="road__cp" data-at="0.24"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.5"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.76"><circle r="4.5"/></g>
+      <g class="road__tree" data-at="0.13" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.37" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.62" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.86" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
     <g class="road__finish">
-      <circle class="road__pin" r="12"/>
-      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
-      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+      <circle class="road__halo" r="15"/>
+      <circle class="road__pin" r="15"/>
+      <circle class="road__keyhole" cx="-5" cy="0" r="3.2"/>
+      <path class="road__keybar" d="M-1.8 0H6.8M3 0V3.8M6.1 0V2.9"/>
     </g>
     <g class="road__car">
       <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>

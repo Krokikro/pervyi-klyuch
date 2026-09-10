@@ -265,8 +265,8 @@
     </div>
 
     <div class="cutrow cutrow--flip mb-4">
-      <figure class="cut" data-reveal="tilt-r">
-          <img src="assets/img/cut/partnery.webp" width="760" height="978" alt="Рукопожатие после подписания партнёрского соглашения" loading="lazy" decoding="async">
+      <figure class="cut" data-reveal="tilt-r" style="--cut-ar:0.512;--cut-max:20rem">
+          <img src="assets/img/cut/partnery.webp" width="461" height="900" alt="Рукопожатие после подписания партнёрского соглашения" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Партнёры из 63 городов</figcaption>
         </figure>
       <div data-reveal="left">
@@ -511,10 +511,18 @@
     <path class="road__ghost" fill="none"/>
     <path class="road__trail" fill="none"/>
     <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+      <g class="road__cp" data-at="0.24"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.5"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.76"><circle r="4.5"/></g>
+      <g class="road__tree" data-at="0.13" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.37" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.62" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.86" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
     <g class="road__finish">
-      <circle class="road__pin" r="12"/>
-      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
-      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+      <circle class="road__halo" r="15"/>
+      <circle class="road__pin" r="15"/>
+      <circle class="road__keyhole" cx="-5" cy="0" r="3.2"/>
+      <path class="road__keybar" d="M-1.8 0H6.8M3 0V3.8M6.1 0V2.9"/>
     </g>
     <g class="road__car">
       <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>

@@ -567,6 +567,8 @@
   var car = road.querySelector('.road__car');
   var start = road.querySelector('.road__start');
   var finish = road.querySelector('.road__finish');
+  var cps = [].slice.call(road.querySelectorAll('.road__cp'));
+  var trees = [].slice.call(road.querySelectorAll('.road__tree'));
   if (!svg || !ghost || !trail || !car) return;
 
   var len = 0;
@@ -598,6 +600,26 @@
     var b = ghost.getPointAtLength(len);
     if (start) start.setAttribute('transform', 'translate(' + a.x.toFixed(1) + ',' + a.y.toFixed(1) + ')');
     if (finish) finish.setAttribute('transform', 'translate(' + b.x.toFixed(1) + ',' + b.y.toFixed(1) + ')');
+
+    cps.forEach(function (g) {
+      var pt = ghost.getPointAtLength(len * parseFloat(g.getAttribute('data-at')));
+      g.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ')');
+    });
+
+    /* Деревья ставим сбоку от дороги, по нормали к ней — чтобы не оказались на полосе */
+    trees.forEach(function (g) {
+      var at = len * parseFloat(g.getAttribute('data-at'));
+      var side = parseFloat(g.getAttribute('data-side')) || 1;
+      var t0 = ghost.getPointAtLength(at - 3 < 0 ? 0 : at - 3);
+      var t1 = ghost.getPointAtLength(at + 3 > len ? len : at + 3);
+      var dx = t1.x - t0.x, dy = t1.y - t0.y;
+      var n = Math.sqrt(dx * dx + dy * dy) || 1;
+      var pt = ghost.getPointAtLength(at);
+      var off = 36 * side;
+      g.setAttribute('transform', 'translate(' +
+        (pt.x - (dy / n) * off).toFixed(1) + ',' + (pt.y + (dx / n) * off).toFixed(1) + ')');
+    });
+
     place();
   }
 
@@ -620,6 +642,11 @@
     car.setAttribute('transform',
       'translate(' + a.x.toFixed(1) + ',' + a.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(1.3)');
     trail.style.strokeDashoffset = (len * (1 - p)).toFixed(1);
+
+    cps.forEach(function (g) {
+      var done = p >= parseFloat(g.getAttribute('data-at'));
+      if (done !== g.classList.contains('is-done')) g.classList.toggle('is-done', done);
+    });
   }
 
   var tick = false;
@@ -631,4 +658,51 @@
   window.addEventListener('load', build);
   window.addEventListener('resize', build, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+
+/* ==========================================================================
+   Отзывы на телефоне: листаем ленту стрелками
+   ========================================================================== */
+(function () {
+  var box = document.querySelector('.reviews');
+  var nav = document.querySelector('.reviews__nav');
+  if (!box || !nav) return;
+
+  var prev = nav.querySelector('[data-rev-prev]');
+  var next = nav.querySelector('[data-rev-next]');
+  var cur = nav.querySelector('[data-rev-i]');
+  var cards = [].slice.call(box.querySelectorAll('.review'));
+  if (!cards.length || !prev || !next) return;
+
+  function step() {
+    var w = cards[0].getBoundingClientRect().width;
+    var gap = parseFloat(getComputedStyle(box).columnGap || getComputedStyle(box).gap) || 0;
+    return w + gap;
+  }
+
+  function sync() {
+    var s = step();
+    var i = s > 0 ? Math.round(box.scrollLeft / s) : 0;
+    if (i < 0) i = 0;
+    if (i > cards.length - 1) i = cards.length - 1;
+    if (cur) cur.textContent = i + 1;
+    prev.disabled = box.scrollLeft < 4;
+    next.disabled = box.scrollLeft > box.scrollWidth - box.clientWidth - 4;
+  }
+
+  var go = function (dir) {
+    box.scrollBy({ left: dir * step(), behavior: 'smooth' });
+  };
+  prev.addEventListener('click', function () { go(-1); });
+  next.addEventListener('click', function () { go(1); });
+
+  var tick = false;
+  box.addEventListener('scroll', function () {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(function () { tick = false; sync(); });
+  }, { passive: true });
+  window.addEventListener('resize', sync, { passive: true });
+  sync();
 })();

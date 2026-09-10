@@ -1571,7 +1571,7 @@ body.is-locked { overflow: hidden; }
   display: block;
   isolation: isolate;
   width: 100%;
-  max-width: 30rem;
+  max-width: var(--cut-max, 30rem);
   margin-inline: auto;
 }
 /* Тень-опора под вырезкой: фон белый, картинка «стоит» на мягком пятне */
@@ -1652,10 +1652,10 @@ body.is-locked { overflow: hidden; }
   .cutrow { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); }
   .cutrow--flip > .cut { order: 2; }
 }
-.cutrow .cut { max-width: 33rem; margin-inline: auto; width: 100%; }
+.cutrow .cut { --cut-max: 33rem; margin-inline: auto; width: 100%; }
 
 /* Узкая вырезка рядом с крупным блоком */
-.cut--sm { max-width: 15rem; }
+.cut--sm { --cut-max: 15rem; }
 
 /* ==========================================================================
    Секции-панели: тонированные блоки как отдельные карточки
@@ -1750,7 +1750,7 @@ html.pt-enter body {
   font-size: var(--fs-sm);
   line-height: 1.5;
 }
-.carband__car { width: 100%; max-width: 30rem; }
+.carband__car { width: 100%; --cut-max: 30rem; }
 .carband__pills {
   list-style: none;
   margin: 0;
@@ -1782,11 +1782,11 @@ html.pt-enter body {
 
 
 /* Размер вырезки под конкретное место */
-.hero__aside .cut { max-width: 26rem; }
-@media (min-width: 1000px) { .hero__aside .cut { max-width: 33rem; } }
-.service__aside .cut { max-width: 26rem; margin-top: clamp(0.9rem, 2vw, 1.4rem); }
-.cutrow .cut { max-width: 26rem; }
-.carband__car { max-width: 36rem; }
+.hero__aside .cut { --cut-max: 26rem; }
+@media (min-width: 1000px) { .hero__aside .cut { --cut-max: 33rem; } }
+.service__aside .cut { --cut-max: 26rem; margin-top: clamp(0.9rem, 2vw, 1.4rem); }
+.cutrow .cut { --cut-max: 26rem; }
+.carband__car { --cut-max: 33.5rem; }
 
 /* На узких экранах боковые появления делаем вертикальными:
    горизонтальный сдвиг раздвигал бы страницу до срабатывания наблюдателя. */
@@ -1872,9 +1872,7 @@ html.pt-enter body {
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: scroll()) {
-    .cut > img.cut__back,
-    .cut.is-in > img.cut__back,
-    .is-in .cut > img.cut__back {
+    .cut__back {
       animation: carPar linear both;
       animation-timeline: scroll(root block);
       animation-range: 0 110vh;
@@ -1887,24 +1885,49 @@ html.pt-enter body {
    Сцена: машина за человеком
    ========================================================================== */
 .cut--scene { --wash-inset: 10% 0% 4% 0%; }
-/* Специфичность держим выше, чем у `.cut > img`, иначе машина встаёт в поток */
-.cut > img.cut__back {
+/* Машина за человеком: своя обёртка, свой пол и своя тень */
+.cut__back {
   position: absolute;
   z-index: 0;
-  left: -14%;
-  top: 30%;
-  width: 112%;
+  left: -26%;
+  bottom: 8%;
+  width: 152%;
+  line-height: 0;
+}
+@media (min-width: 600px) {
+  .cut__back { left: -62%; width: 222%; bottom: 9%; }
+}
+@media (min-width: 900px) {
+  .cut__back { left: -74%; width: 240%; bottom: 11%; }
+}
+.cut__back img {
+  display: block;
+  width: 100%;
   height: auto;
   opacity: 0.97;
   /* Отражаем: так морда машины видна слева от девушки, а не прячется за ней */
   transform: scaleX(-1);
-  filter: drop-shadow(0 14px 20px rgba(54, 8, 2, 0.12));
+  filter: drop-shadow(0 16px 22px rgba(54, 8, 2, 0.13));
 }
-@media (min-width: 900px) {
-  .cut > img.cut__back { left: -20%; width: 122%; top: 27%; }
+.cut__back::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: -3%;
+  width: 84%;
+  height: 9%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(54, 8, 2, 0.32) 0%,
+    rgba(54, 8, 2, 0.15) 40%,
+    rgba(54, 8, 2, 0) 70%
+  );
 }
-.hero__aside .cut--scene { max-width: 27rem; }
-@media (min-width: 1000px) { .hero__aside .cut--scene { max-width: 34rem; } }
+.hero__aside .cut--scene { --cut-max: 13.5rem; }
+@media (min-width: 1000px) { .hero__aside .cut--scene { --cut-max: 17rem; } }
 
 /* ==========================================================================
    Оставить отзыв
@@ -2064,3 +2087,96 @@ html.pt-enter body {
 /* Маршрут живёт в левом поле — там, где нет текста. Узким экранам он не по размеру. */
 @media (max-width: 1099px) { .road { display: none; } }
 @media (prefers-reduced-motion: reduce) { .road { display: none; } }
+
+
+/* Финиш — заметная точка прибытия */
+.road__halo {
+  fill: none;
+  stroke: var(--c-orange);
+  stroke-width: 2;
+  opacity: 0.45;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: roadPulse 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes roadPulse {
+  0% { transform: scale(0.7); opacity: 0.55; }
+  70%, 100% { transform: scale(1.75); opacity: 0; }
+}
+.road__finish .road__pin { filter: drop-shadow(0 4px 10px rgba(247, 59, 32, 0.45)); }
+
+/* Отметки на маршруте: загораются, когда машинка их прошла */
+.road__cp circle {
+  fill: var(--c-white);
+  stroke: rgba(54, 8, 2, 0.22);
+  stroke-width: 2;
+  transition: fill 0.35s var(--ease-out), stroke 0.35s var(--ease-out);
+}
+.road__cp.is-done circle { fill: var(--c-orange); stroke: var(--c-orange); }
+
+/* Редкие деревья вдоль дороги */
+.road__trunk { fill: rgba(54, 8, 2, 0.3); }
+.road__leaf { fill: rgba(52, 199, 113, 0.3); }
+
+/* ==========================================================================
+   Отзывы на телефоне: горизонтальная лента со стрелками — экономит экран
+   ========================================================================== */
+.reviews__nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 1.1rem;
+}
+.reviews__count {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-55);
+  font-variant-numeric: tabular-nums;
+}
+.rnav {
+  width: 2.7rem;
+  height: 2.7rem;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: var(--c-white);
+  color: var(--c-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease),
+    opacity 0.25s var(--ease);
+}
+.rnav svg { width: 1.15rem; height: 1.15rem; }
+.rnav:hover { border-color: var(--border-brand); background: var(--surface-tint); }
+.rnav:disabled { opacity: 0.32; cursor: default; }
+
+@media (max-width: 679px) {
+  .reviews {
+    columns: auto;
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: 0.3rem;
+    scrollbar-width: none;
+  }
+  .reviews::-webkit-scrollbar { display: none; }
+  .review {
+    flex: 0 0 min(82vw, 21rem);
+    margin-bottom: 0;
+    scroll-snap-align: start;
+  }
+  .review:hover { transform: none; box-shadow: none; border-color: var(--border-soft); }
+  .reviews__nav { display: flex; }
+}
+
+/* На телефоне вырезку ограничиваем не шириной, а высотой экрана —
+   иначе фигура в полный рост занимает пол-страницы. */
+@media (max-width: 679px) {
+  .cut { max-width: min(var(--cut-max, 30rem), calc(40vh * var(--cut-ar, 1))); }
+}

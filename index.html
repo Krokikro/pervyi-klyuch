@@ -118,9 +118,9 @@
     </div>
 
     <div class="hero__aside fade-up d2">
-      <figure class="cut cut--scene" data-reveal="tilt">
-          <img class="cut__back" src="assets/img/cut/avto.webp" width="1300" height="800" alt="" aria-hidden="true" loading="eager" decoding="async">
-          <img src="assets/img/cut/klient.webp" width="760" height="978" alt="Клиентка «Первого ключа» с ключами от полученного автомобиля" loading="eager" decoding="async">
+      <figure class="cut cut--scene" data-reveal="tilt" style="--cut-ar:0.434">
+          <span class="cut__back" aria-hidden="true"><img src="assets/img/cut/avto.webp" width="1300" height="565" alt="" loading="eager" decoding="async"></span>
+          <img src="assets/img/cut/klient.webp" width="651" height="1500" alt="Клиентка «Первого ключа» с ключами от полученного автомобиля" loading="eager" decoding="async">
           <figcaption class="cut__tag">От заявки до ключей — 1–3 дня</figcaption>
         </figure>
       <aside class="hero__panel" aria-label="Условия коротко">
@@ -278,8 +278,8 @@
   <div class="container carband__in">
     <p class="carband__note" data-reveal="left">Марка и цена роли не играют.
       Легковые, коммерческий транспорт и спецтехника — условия одни и те же.</p>
-    <figure class="cut cut--auto carband__car" data-reveal="drive">
-          <img src="assets/img/cut/krossover.webp" width="1400" height="866" alt="Кроссовер, купленный для клиента по договору аренды с правом выкупа" loading="lazy" decoding="async">
+    <figure class="cut cut--auto carband__car" data-reveal="drive" style="--cut-ar:1.985">
+          <img src="assets/img/cut/krossover.webp" width="1300" height="655" alt="Кроссовер, купленный для клиента по договору аренды с правом выкупа" loading="lazy" decoding="async">
         </figure>
     <ul class="carband__pills" data-reveal="right">
       <li>от 340 000 ₽ до 100 млн ₽</li>
@@ -555,6 +555,16 @@
         <p class="review__text">Мне важно было закрыть вопрос быстро: продал старую, деньги на руках, а новую надо было забирать в выходные. Договорились в пятницу вечером, в субботу подписали, в воскресенье уже ехал на дачу. Сумму озвучили сразу целиком, никаких сюрпризов в договоре не нашёл, хотя читал внимательно и с карандашом.</p>
         <div class="review__car"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l1.5-5.5A2 2 0 0 1 8.4 10h7.2a2 2 0 0 1 1.9 1.5L19 17h2"/><path d="M5 17h14v3H5z"/></svg> BMW X5, 2024</div>
       </article>
+    </div>
+
+    <div class="reviews__nav">
+      <button class="rnav" type="button" data-rev-prev aria-label="Предыдущий отзыв">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+      </button>
+      <span class="reviews__count"><b data-rev-i>1</b> из 11</span>
+      <button class="rnav" type="button" data-rev-next aria-label="Следующий отзыв">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
     </div>
 
     <div class="review-add" data-reveal>
@@ -896,10 +906,18 @@
     <path class="road__ghost" fill="none"/>
     <path class="road__trail" fill="none"/>
     <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+      <g class="road__cp" data-at="0.24"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.5"><circle r="4.5"/></g>
+      <g class="road__cp" data-at="0.76"><circle r="4.5"/></g>
+      <g class="road__tree" data-at="0.13" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.37" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.62" data-side="-1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
+      <g class="road__tree" data-at="0.86" data-side="1"><rect class="road__trunk" x="-1.4" y="-1" width="2.8" height="9" rx="1.3"/><circle class="road__leaf" cx="0" cy="-6" r="7.5"/><circle class="road__leaf" cx="-5" cy="-1" r="5.4"/><circle class="road__leaf" cx="5" cy="-1" r="5.4"/></g>
     <g class="road__finish">
-      <circle class="road__pin" r="12"/>
-      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
-      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+      <circle class="road__halo" r="15"/>
+      <circle class="road__pin" r="15"/>
+      <circle class="road__keyhole" cx="-5" cy="0" r="3.2"/>
+      <path class="road__keybar" d="M-1.8 0H6.8M3 0V3.8M6.1 0V2.9"/>
     </g>
     <g class="road__car">
       <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>
