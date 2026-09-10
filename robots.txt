@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /assets/fonts/
+
+Host: pervyi-klyuch.ru
+Sitemap: https://krokikro.github.io/pervyi-klyuch/sitemap.xml
+
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&from
