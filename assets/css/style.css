@@ -1928,7 +1928,9 @@ html.pt-enter body {
         animation-range: calc(var(--hero-h, 100vh) - 96vh) calc(var(--hero-h, 100vh) - 8vh);
       }
     }
-    .cut__back {
+    .cut > img.cut__back,
+    .cut.is-in > img.cut__back,
+    .is-in .cut > img.cut__back {
       animation: carPar linear both;
       animation-timeline: scroll(root block);
       animation-range: 0 110vh;
@@ -1946,21 +1948,21 @@ html.pt-enter body {
 /* ==========================================================================
    Сцена: машина за человеком
    ========================================================================== */
-.cut--scene { --wash-inset: 12% 0% 4% 0%; }
-.cut__back {
+.cut--scene { --wash-inset: 10% 0% 4% 0%; }
+/* Специфичность держим выше, чем у `.cut > img`, иначе машина встаёт в поток */
+.cut > img.cut__back {
   position: absolute;
   z-index: 0;
-  left: -12%;
-  top: 26%;
-  width: 108%;
+  left: -14%;
+  top: 30%;
+  width: 112%;
   height: auto;
   opacity: 0.97;
   filter: drop-shadow(0 14px 20px rgba(54, 8, 2, 0.12));
 }
 @media (min-width: 900px) {
-  .cut__back { left: -18%; width: 118%; }
+  .cut > img.cut__back { left: -20%; width: 122%; top: 27%; }
 }
-.cut--scene > img:not(.cut__back) { position: relative; z-index: 1; }
 .hero__aside .cut--scene { max-width: 25rem; }
 @media (min-width: 1000px) { .hero__aside .cut--scene { max-width: 31rem; } }
 
