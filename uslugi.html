@@ -101,7 +101,7 @@
 </section>
 
 <!-- ================= УСЛУГА 1 ================= -->
-<section class="section" style="padding-top:0" id="podbor">
+<section class="section" id="podbor">
   <div class="container">
     <article class="service">
       <div class="service__aside" data-reveal="left">
@@ -109,7 +109,7 @@
         <h2>Подбор автомобиля</h2>
         <span class="chip">Входит в сделку</span>
         <p class="small muted">От двух дней до недели — зависит от того, насколько редкую конфигурацию вы ищете.</p>
-        <figure class="cut cut--sky" data-reveal="tilt">
+        <figure class="cut" data-reveal="tilt">
           <img src="assets/img/cut/podbor.webp" width="720" height="956" alt="Специалист по подбору показывает клиенту найденные варианты" loading="lazy" decoding="async">
           <figcaption class="cut__tag">5–8 живых вариантов</figcaption>
         </figure>
@@ -141,7 +141,7 @@
         <h2>Проверка и предпродажная подготовка</h2>
         <span class="chip chip--blue">Отчёт в тот же день</span>
         <p class="small muted">Свою машину проверяем бесплатно. Чужую, если покупаете за наличные, — как отдельную услугу.</p>
-        <figure class="cut cut--citrus cut--right" data-reveal="tilt-r">
+        <figure class="cut" data-reveal="tilt-r">
           <img src="assets/img/cut/proverka.webp" width="1040" height="1380" alt="Техник с толщиномером проверяет кузов автомобиля перед покупкой" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Толщиномер, сканер, подъёмник</figcaption>
         </figure>
@@ -176,7 +176,7 @@
         <h2>Аренда автомобиля с правом выкупа</h2>
         <span class="chip chip--mint">Решение за 1 день</span>
         <p class="small muted">Основная услуга, ради которой всё остальное и существует.</p>
-        <figure class="cut cut--mint" data-reveal="tilt">
+        <figure class="cut" data-reveal="tilt">
           <img src="assets/img/cut/kluchi.webp" width="1200" height="1200" alt="Передача ключей после подписания договора аренды с правом выкупа" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Ключи — в день подписания</figcaption>
         </figure>
@@ -313,7 +313,7 @@
 </section>
 
 <!-- ================= КАЛЬКУЛЯТОР ================= -->
-<section class="section section--cover" id="kalkulyator">
+<section class="section" id="kalkulyator">
   <div class="container">
     <div class="section-head" data-reveal="rise">
       <span class="eyebrow">Калькулятор</span>
@@ -415,7 +415,7 @@
 </section>
 
 <!-- ================= CTA ================= -->
-<section class="section section--cover">
+<section class="section">
   <div class="container">
     <div class="cta-band" data-reveal>
       <div>
@@ -614,6 +614,29 @@
   ]
 }
 </script>
+
+
+<!-- Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки -->
+<div class="road" aria-hidden="true">
+  <svg preserveAspectRatio="none" focusable="false">
+    <path class="road__ghost" fill="none"/>
+    <path class="road__trail" fill="none"/>
+    <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+    <g class="road__finish">
+      <circle class="road__pin" r="12"/>
+      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
+      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+    </g>
+    <g class="road__car">
+      <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="-11" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <path class="road__body" d="M-14-7L6-7Q13-7 15-3L15 3Q13 7 6 7L-14 7Q-16 7-16 5L-16-5Q-16-7-14-7Z"/>
+      <path class="road__roof" d="M-8-4.2L2-4.2Q5-4.2 6-2.4L6 2.4Q5 4.2 2 4.2L-8 4.2Q-9.6 4.2-9.6 2.4L-9.6-2.4Q-9.6-4.2-8-4.2Z"/>
+    </g>
+  </svg>
+</div>
 
 </body>
 </html>

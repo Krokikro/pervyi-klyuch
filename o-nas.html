@@ -101,7 +101,7 @@
 </section>
 
 <!-- ================= ЦИФРЫ ================= -->
-<section class="section" style="padding-top:0">
+<section class="section">
   <div class="container">
     <div class="stats" data-stagger="90">
       <div class="stat" data-reveal>
@@ -135,8 +135,8 @@
       <div data-reveal="left">
         <span class="eyebrow">Как всё начиналось</span>
         <h2 class="mt-2">Первая машина была куплена для соседа по гаражу</h2>
-        <figure class="cut cut--citrus cut--car mt-3" data-reveal="drive">
-          <img src="assets/img/cut/sedan.webp" width="1520" height="940" alt="Седан, выкупленный клиентом по договору аренды с правом выкупа" loading="lazy" decoding="async">
+        <figure class="cut cut--auto mt-3" data-reveal="drive">
+          <img src="assets/img/cut/sedan.webp" width="1600" height="990" alt="Седан, выкупленный клиентом по договору аренды с правом выкупа" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Первая сделка — 2017 год</figcaption>
         </figure>
       </div>
@@ -188,7 +188,7 @@
 </section>
 
 <!-- ================= ПРИНЦИПЫ ================= -->
-<section class="section section--cover">
+<section class="section">
   <div class="container">
     <div class="section-head section-head--wide" data-reveal="rise">
       <span class="eyebrow">Как мы работаем</span>
@@ -197,7 +197,7 @@
     </div>
 
     <div class="cutrow mb-4">
-      <figure class="cut cut--mint cut--wide" data-reveal="tilt-r">
+      <figure class="cut" data-reveal="tilt-r">
           <img src="assets/img/cut/komanda.webp" width="1600" height="1120" alt="Команда «Первого ключа»: отдел подбора, техник и юрист" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Три подборщика, техник и юрист</figcaption>
         </figure>
@@ -269,7 +269,7 @@
 </section>
 
 <!-- ================= НЕУДОБНЫЕ ВОПРОСЫ ================= -->
-<section class="section section--cover">
+<section class="section">
   <div class="container">
     <div class="section-head" data-reveal="rise">
       <span class="eyebrow">Без прикрас</span>
@@ -322,7 +322,7 @@
 </section>
 
 <!-- ================= CTA ================= -->
-<section class="section" style="padding-top:0">
+<section class="section">
   <div class="container">
     <div class="cta-band" data-reveal>
       <div>
@@ -503,6 +503,29 @@
   ]
 }
 </script>
+
+
+<!-- Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки -->
+<div class="road" aria-hidden="true">
+  <svg preserveAspectRatio="none" focusable="false">
+    <path class="road__ghost" fill="none"/>
+    <path class="road__trail" fill="none"/>
+    <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+    <g class="road__finish">
+      <circle class="road__pin" r="12"/>
+      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
+      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+    </g>
+    <g class="road__car">
+      <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="-11" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <path class="road__body" d="M-14-7L6-7Q13-7 15-3L15 3Q13 7 6 7L-14 7Q-16 7-16 5L-16-5Q-16-7-14-7Z"/>
+      <path class="road__roof" d="M-8-4.2L2-4.2Q5-4.2 6-2.4L6 2.4Q5 4.2 2 4.2L-8 4.2Q-9.6 4.2-9.6 2.4L-9.6-2.4Q-9.6-4.2-8-4.2Z"/>
+    </g>
+  </svg>
+</div>
 
 </body>
 </html>

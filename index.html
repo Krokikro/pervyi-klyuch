@@ -118,7 +118,7 @@
     </div>
 
     <div class="hero__aside fade-up d2">
-      <figure class="cut cut--peach cut--scene" data-reveal="tilt">
+      <figure class="cut cut--scene" data-reveal="tilt">
           <img class="cut__back" src="assets/img/cut/avto.webp" width="1300" height="800" alt="" aria-hidden="true" loading="eager" decoding="async">
           <img src="assets/img/cut/klient.webp" width="760" height="978" alt="Клиентка «Первого ключа» с ключами от полученного автомобиля" loading="eager" decoding="async">
           <figcaption class="cut__tag">От заявки до ключей — 1–3 дня</figcaption>
@@ -175,7 +175,7 @@
 </div>
 
 <!-- ================= ОФФЕР + ФОРМА ================= -->
-<section class="section section--cover" id="zayavka">
+<section class="section" id="zayavka">
   <div class="container">
     <div class="offer" data-reveal>
       <div class="offer__inner">
@@ -274,12 +274,12 @@
 </section>
 
 <!-- ================= КАЛЬКУЛЯТОР ================= -->
-<section class="section carband section--cover" style="padding-block:clamp(1.6rem,3vw,2.6rem) 0">
+<section class="section carband" style="padding-block:clamp(1.6rem,3vw,2.6rem) 0">
   <div class="container carband__in">
     <p class="carband__note" data-reveal="left">Марка и цена роли не играют.
       Легковые, коммерческий транспорт и спецтехника — условия одни и те же.</p>
-    <figure class="cut cut--sky cut--car carband__car" data-reveal="drive">
-          <img src="assets/img/cut/krossover.webp" width="1040" height="644" alt="Кроссовер, купленный для клиента по договору аренды с правом выкупа" loading="lazy" decoding="async">
+    <figure class="cut cut--auto carband__car" data-reveal="drive">
+          <img src="assets/img/cut/krossover.webp" width="1400" height="866" alt="Кроссовер, купленный для клиента по договору аренды с правом выкупа" loading="lazy" decoding="async">
         </figure>
     <ul class="carband__pills" data-reveal="right">
       <li>от 340 000 ₽ до 100 млн ₽</li>
@@ -404,7 +404,7 @@
      По этой же причине здесь намеренно нет микроразметки Review/AggregateRating —
      включите её, когда появятся настоящие отзывы.
 ================================================ -->
-<section class="section section--cover">
+<section class="section">
   <div class="container">
     <div class="section-head section-head--wide" data-reveal="rise">
       <span class="eyebrow">Отзывы</span>
@@ -888,6 +888,29 @@
   ]
 }
 </script>
+
+
+<!-- Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки -->
+<div class="road" aria-hidden="true">
+  <svg preserveAspectRatio="none" focusable="false">
+    <path class="road__ghost" fill="none"/>
+    <path class="road__trail" fill="none"/>
+    <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+    <g class="road__finish">
+      <circle class="road__pin" r="12"/>
+      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
+      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+    </g>
+    <g class="road__car">
+      <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="-11" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <path class="road__body" d="M-14-7L6-7Q13-7 15-3L15 3Q13 7 6 7L-14 7Q-16 7-16 5L-16-5Q-16-7-14-7Z"/>
+      <path class="road__roof" d="M-8-4.2L2-4.2Q5-4.2 6-2.4L6 2.4Q5 4.2 2 4.2L-8 4.2Q-9.6 4.2-9.6 2.4L-9.6-2.4Q-9.6-4.2-8-4.2Z"/>
+    </g>
+  </svg>
+</div>
 
 </body>
 </html>

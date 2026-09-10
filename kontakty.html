@@ -100,7 +100,7 @@
 </section>
 
 <!-- ================= КОНТАКТЫ ================= -->
-<section class="section" style="padding-top:0">
+<section class="section">
   <div class="container">
     <div class="grid grid-3" data-stagger="80">
       <a class="contact-card" href="tel:+74951234567" data-reveal>
@@ -138,7 +138,7 @@
 </section>
 
 <!-- ================= КАРТА ================= -->
-<section class="section" style="padding-top:0">
+<section class="section">
   <div class="container">
     <div class="map" data-reveal>
       <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Схема расположения офиса: улица Бутырская, 62, Москва">
@@ -256,7 +256,7 @@
 </section>
 
 <!-- ================= ПАРТНЁРАМ И ИНВЕСТОРАМ ================= -->
-<section class="section section--cover" id="partneram">
+<section class="section" id="partneram">
   <div class="container">
     <div class="section-head section-head--wide" data-reveal="rise">
       <span class="eyebrow">Партнёрам и инвесторам</span>
@@ -265,7 +265,7 @@
     </div>
 
     <div class="cutrow cutrow--flip mb-4">
-      <figure class="cut cut--peach cut--right" data-reveal="tilt-r">
+      <figure class="cut" data-reveal="tilt-r">
           <img src="assets/img/cut/partnery.webp" width="760" height="978" alt="Рукопожатие после подписания партнёрского соглашения" loading="lazy" decoding="async">
           <figcaption class="cut__tag">Партнёры из 63 городов</figcaption>
         </figure>
@@ -503,6 +503,29 @@
   ]
 }
 </script>
+
+
+<!-- Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки -->
+<div class="road" aria-hidden="true">
+  <svg preserveAspectRatio="none" focusable="false">
+    <path class="road__ghost" fill="none"/>
+    <path class="road__trail" fill="none"/>
+    <g class="road__start"><circle class="road__dot" r="5.5"/></g>
+    <g class="road__finish">
+      <circle class="road__pin" r="12"/>
+      <circle class="road__keyhole" cx="-4" cy="0" r="2.6"/>
+      <path class="road__keybar" d="M-1.4 0H5.4M2.4 0V3M4.9 0V2.3"/>
+    </g>
+    <g class="road__car">
+      <rect class="road__wheel" x="-11" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="-9" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="-11" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <rect class="road__wheel" x="3" y="5.8" width="7" height="3.2" rx="1.6"/>
+      <path class="road__body" d="M-14-7L6-7Q13-7 15-3L15 3Q13 7 6 7L-14 7Q-16 7-16 5L-16-5Q-16-7-14-7Z"/>
+      <path class="road__roof" d="M-8-4.2L2-4.2Q5-4.2 6-2.4L6 2.4Q5 4.2 2 4.2L-8 4.2Q-9.6 4.2-9.6 2.4L-9.6-2.4Q-9.6-4.2-8-4.2Z"/>
+    </g>
+  </svg>
+</div>
 
 </body>
 </html>

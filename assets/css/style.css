@@ -223,6 +223,14 @@ strong, b { font-weight: 500; }
 .section { padding-block: var(--sec-pad); }
 .section--tint { background: var(--c-linen); }
 .section--sand { background: #faf7f6; }
+@media (min-width: 720px) {
+  .section--tint,
+  .section--sand {
+    border-radius: clamp(1.4rem, 2.4vw, 2.2rem);
+    margin-inline: clamp(0.5rem, 1.4vw, 1.4rem);
+    overflow: hidden;
+  }
+}
 
 .section-head {
   display: grid;
@@ -1563,22 +1571,28 @@ body.is-locked { overflow: hidden; }
   display: block;
   isolation: isolate;
   width: 100%;
-  max-width: 25rem;
+  max-width: 30rem;
   margin-inline: auto;
-  --wash: var(--c-linen);
-  --tilt: -3deg;
-  --wash-inset: 14% 5% 4% 5%;
 }
-/* Пастельная подложка — наклонённая карточка под вырезкой */
+/* Тень-опора под вырезкой: фон белый, картинка «стоит» на мягком пятне */
 .cut::before {
   content: '';
   position: absolute;
-  inset: var(--wash-inset);
-  z-index: -1;
-  background: var(--wash);
-  border-radius: var(--r-lg);
-  transform: rotate(var(--tilt));
-  transition: transform 0.9s var(--ease-out);
+  z-index: 0;
+  left: 50%;
+  bottom: 0.5%;
+  width: var(--sh-w, 50%);
+  height: var(--sh-h, 6%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(54, 8, 2, 0.38) 0%,
+    rgba(54, 8, 2, 0.18) 40%,
+    rgba(54, 8, 2, 0) 70%
+  );
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.72);
+  transition: transform 1.1s var(--ease-out), opacity 0.8s var(--ease-out);
 }
 .cut > img {
   position: relative;
@@ -1586,8 +1600,8 @@ body.is-locked { overflow: hidden; }
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 18px 22px rgba(54, 8, 2, 0.14))
-          drop-shadow(0 3px 6px rgba(54, 8, 2, 0.07));
+  filter: drop-shadow(0 22px 26px rgba(54, 8, 2, 0.16))
+          drop-shadow(0 4px 8px rgba(54, 8, 2, 0.08));
   transform: translate3d(0, 10px, 0);
   opacity: 0;
   transition: transform 1.1s var(--ease-out), opacity 0.8s var(--ease-out);
@@ -1595,19 +1609,9 @@ body.is-locked { overflow: hidden; }
 .cut.is-in > img,
 .is-in .cut > img { transform: none; opacity: 1; }
 .cut.is-in::before,
-.is-in .cut::before { transform: rotate(calc(var(--tilt) * 0.62)); }
-.cut:hover::before { transform: rotate(calc(var(--tilt) * 1.5)); }
+.is-in .cut::before { opacity: 1; transform: translateX(-50%) scaleX(1); }
 .cut:hover > img { transform: translate3d(0, -6px, 0); }
-
-.cut--mint { --wash: var(--c-mint); }
-.cut--sky { --wash: #e8f1ff; }
-.cut--peach { --wash: #ffeadc; }
-.cut--citrus { --wash: var(--c-citrus); }
-.cut--sand { --wash: #f2e9e7; }
-.cut--right { --tilt: 3deg; }
-/* Автомобиль: подложка ниже и шире, машина «стоит» на пятне */
-.cut--car { --wash-inset: 26% 2% 12% 2%; }
-.cut--wide { --wash-inset: 20% 4% 8% 4%; }
+.cut:hover::before { transform: translateX(-50%) scaleX(1.06); }
 
 /* Пилюля-подпись поверх вырезки */
 .cut__tag {
@@ -1648,7 +1652,7 @@ body.is-locked { overflow: hidden; }
   .cutrow { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); }
   .cutrow--flip > .cut { order: 2; }
 }
-.cutrow .cut { max-width: 27rem; margin-inline: auto; width: 100%; }
+.cutrow .cut { max-width: 33rem; margin-inline: auto; width: 100%; }
 
 /* Узкая вырезка рядом с крупным блоком */
 .cut--sm { max-width: 15rem; }
@@ -1656,14 +1660,7 @@ body.is-locked { overflow: hidden; }
 /* ==========================================================================
    Секции-панели: тонированные блоки как отдельные карточки
    ========================================================================== */
-@media (min-width: 720px) {
-  .section--tint,
-  .section--sand {
-    border-radius: clamp(1.4rem, 2.4vw, 2.2rem);
-    margin-inline: clamp(0.5rem, 1.4vw, 1.4rem);
-    overflow: hidden;
-  }
-}
+
 
 /* ==========================================================================
    Шапка-пилюля: при прокрутке превращается в плавающую панель
@@ -1785,11 +1782,11 @@ html.pt-enter body {
 
 
 /* Размер вырезки под конкретное место */
-.hero__aside .cut { max-width: 23rem; }
-@media (min-width: 1000px) { .hero__aside .cut { max-width: 30rem; } }
-.service__aside .cut { max-width: 21rem; margin-top: clamp(0.9rem, 2vw, 1.4rem); }
+.hero__aside .cut { max-width: 26rem; }
+@media (min-width: 1000px) { .hero__aside .cut { max-width: 33rem; } }
+.service__aside .cut { max-width: 26rem; margin-top: clamp(0.9rem, 2vw, 1.4rem); }
 .cutrow .cut { max-width: 26rem; }
-.carband__car { max-width: 28rem; }
+.carband__car { max-width: 36rem; }
 
 /* На узких экранах боковые появления делаем вертикальными:
    горизонтальный сдвиг раздвигал бы страницу до срабатывания наблюдателя. */
@@ -1868,51 +1865,6 @@ html.pt-enter body {
 }
 
 
-/* ==========================================================================
-   Наезд блоков: секции наползают друг на друга при прокрутке
-   ========================================================================== */
-:root {
-  --cover: clamp(1.3rem, 3.2vw, 2.8rem);
-  --r-cover: clamp(1.4rem, 3.4vw, 2.4rem);
-}
-
-.section--cover {
-  position: relative;
-  z-index: 1;
-  margin-top: calc(var(--cover) * -1);
-  padding-top: calc(var(--sec-pad) + var(--cover) * 0.7);
-  background: var(--c-white);
-  border-start-start-radius: var(--r-cover);
-  border-start-end-radius: var(--r-cover);
-  box-shadow: 0 -1.6rem 3.2rem -1.3rem rgba(54, 8, 2, 0.14);
-}
-
-@media (min-width: 720px) {
-  .section--tint,
-  .section--sand {
-    position: relative;
-    z-index: 1;
-    margin-top: calc(var(--cover) * -1);
-    box-shadow: 0 -1.4rem 3rem -1.2rem rgba(54, 8, 2, 0.12);
-  }
-}
-
-/* Первый экран залипает, следующий блок наползает на него сверху */
-@media (min-width: 760px) {
-  .hero,
-  .page-hero {
-    position: sticky;
-    top: min(0px, calc(100dvh - var(--hero-h, 100vh)));
-    z-index: 0;
-  }
-}
-
-@keyframes heroRecede {
-  to {
-    transform: scale(0.962) translate3d(0, -0.9rem, 0);
-    opacity: 0.68;
-  }
-}
 @keyframes carPar {
   from { translate: 0 1.6rem; }
   to { translate: 0 -2.6rem; }
@@ -1920,14 +1872,6 @@ html.pt-enter body {
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: scroll()) {
-    @media (min-width: 760px) {
-      .hero__grid,
-      .page-hero__grid {
-        animation: heroRecede linear both;
-        animation-timeline: scroll(root block);
-        animation-range: calc(var(--hero-h, 100vh) - 96vh) calc(var(--hero-h, 100vh) - 8vh);
-      }
-    }
     .cut > img.cut__back,
     .cut.is-in > img.cut__back,
     .is-in .cut > img.cut__back {
@@ -1938,12 +1882,6 @@ html.pt-enter body {
   }
 }
 
-/* Запасной вариант для браузеров без scroll-driven анимаций */
-.js-recede .hero__grid,
-.js-recede .page-hero__grid {
-  transform: scale(var(--rec-s, 1)) translate3d(0, var(--rec-y, 0px), 0);
-  opacity: var(--rec-o, 1);
-}
 
 /* ==========================================================================
    Сцена: машина за человеком
@@ -1958,13 +1896,15 @@ html.pt-enter body {
   width: 112%;
   height: auto;
   opacity: 0.97;
+  /* Отражаем: так морда машины видна слева от девушки, а не прячется за ней */
+  transform: scaleX(-1);
   filter: drop-shadow(0 14px 20px rgba(54, 8, 2, 0.12));
 }
 @media (min-width: 900px) {
   .cut > img.cut__back { left: -20%; width: 122%; top: 27%; }
 }
-.hero__aside .cut--scene { max-width: 25rem; }
-@media (min-width: 1000px) { .hero__aside .cut--scene { max-width: 31rem; } }
+.hero__aside .cut--scene { max-width: 27rem; }
+@media (min-width: 1000px) { .hero__aside .cut--scene { max-width: 34rem; } }
 
 /* ==========================================================================
    Оставить отзыв
@@ -2060,17 +2000,6 @@ html.pt-enter body {
   white-space: nowrap;
 }
 
-/* ==========================================================================
-   Непрозрачный фон секций: под ними «залипший» первый экран
-   ========================================================================== */
-.section {
-  position: relative;
-  z-index: 1;
-  background: var(--c-white);
-}
-.section--tint { background: var(--c-linen); }
-.section--sand { background: #faf7f6; }
-.footer { position: relative; z-index: 1; }
 
 /* Звёзды прижимаем к левому краю поля */
 .rate {
@@ -2080,3 +2009,58 @@ html.pt-enter body {
 }
 
 .rate { margin-block: 0.15rem 0.5rem; }
+
+/* Машина стоит на широком пятне, человек — на узком */
+.cut--auto,
+.carband__car { --sh-w: 78%; --sh-h: 7.5%; }
+.cutrow .cut { --sh-w: 66%; }
+
+
+/* ==========================================================================
+   Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки
+   ========================================================================== */
+.road {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.road svg { width: 100%; height: 100%; display: block; }
+
+.road__ghost {
+  stroke: rgba(54, 8, 2, 0.13);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1 9;
+}
+.road__trail {
+  stroke: var(--c-orange);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  opacity: 0.5;
+}
+.road__dot {
+  fill: var(--c-white);
+  stroke: rgba(247, 59, 32, 0.55);
+  stroke-width: 2;
+  r: 4;
+}
+.road__pin { fill: var(--c-orange); }
+.road__keyhole { fill: none; stroke: var(--c-white); stroke-width: 1.8; }
+.road__keybar {
+  fill: none;
+  stroke: var(--c-white);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.road__body { fill: var(--c-orange); }
+.road__roof { fill: rgba(255, 255, 255, 0.88); }
+.road__wheel { fill: var(--c-ink); }
+.road__car {
+  filter: drop-shadow(0 3px 5px rgba(54, 8, 2, 0.22));
+  transition: transform 0.12s linear;
+}
+
+/* Маршрут живёт в левом поле — там, где нет текста. Узким экранам он не по размеру. */
+@media (max-width: 1099px) { .road { display: none; } }
+@media (prefers-reduced-motion: reduce) { .road { display: none; } }

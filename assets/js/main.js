@@ -555,50 +555,80 @@
 
 
 /* ==========================================================================
-   Наезд блоков: высота первого экрана + запасной вариант без scroll-timeline
+   Фоновый маршрут: машинка едет от старта к ключам по мере прокрутки
    ========================================================================== */
 (function () {
-  var hero = document.querySelector('.hero, .page-hero');
-  if (!hero) return;
-  var root = document.documentElement;
+  var road = document.querySelector('.road');
+  if (!road) return;
 
-  var setH = function () {
-    root.style.setProperty('--hero-h', hero.offsetHeight + 'px');
-  };
-  setH();
-  window.addEventListener('resize', setH, { passive: true });
-  window.addEventListener('load', setH);
-  if (window.ResizeObserver) new ResizeObserver(setH).observe(hero);
+  var svg = road.querySelector('svg');
+  var ghost = road.querySelector('.road__ghost');
+  var trail = road.querySelector('.road__trail');
+  var car = road.querySelector('.road__car');
+  var start = road.querySelector('.road__start');
+  var finish = road.querySelector('.road__finish');
+  if (!svg || !ghost || !trail || !car) return;
 
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var native = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
-  if (reduced || native) return;
+  var len = 0;
+  var on = false;
 
-  var grid = hero.querySelector('.hero__grid, .page-hero__grid');
-  if (!grid) return;
-  root.classList.add('js-recede');
+  function makePath(w, h) {
+    var x0 = Math.min(Math.max(w * 0.035, 34), 82);   /* ближняя к краю колея */
+    var x1 = x0 + Math.min(Math.max(w * 0.05, 52), 96);   /* дальняя */
+    var y = function (k) { return (h * k).toFixed(1); };
+    return 'M ' + x0 + ' ' + y(0.11) +
+      ' C ' + x0 + ' ' + y(0.17) + ' ' + x1 + ' ' + y(0.17) + ' ' + x1 + ' ' + y(0.28) +
+      ' C ' + x1 + ' ' + y(0.39) + ' ' + x0 + ' ' + y(0.39) + ' ' + x0 + ' ' + y(0.5) +
+      ' C ' + x0 + ' ' + y(0.61) + ' ' + x1 + ' ' + y(0.61) + ' ' + x1 + ' ' + y(0.72) +
+      ' C ' + x1 + ' ' + y(0.84) + ' ' + x0 + ' ' + y(0.84) + ' ' + x0 + ' ' + y(0.93);
+  }
+
+  function build() {
+    on = window.innerWidth >= 1100 &&
+         !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!on) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var d = makePath(w, h);
+    ghost.setAttribute('d', d);
+    trail.setAttribute('d', d);
+    len = ghost.getTotalLength();
+    trail.style.strokeDasharray = len;
+    var a = ghost.getPointAtLength(0);
+    var b = ghost.getPointAtLength(len);
+    if (start) start.setAttribute('transform', 'translate(' + a.x.toFixed(1) + ',' + a.y.toFixed(1) + ')');
+    if (finish) finish.setAttribute('transform', 'translate(' + b.x.toFixed(1) + ',' + b.y.toFixed(1) + ')');
+    place();
+  }
+
+  function place() {
+    if (!on || !len) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? window.scrollY / max : 0;
+    p = p < 0 ? 0 : p > 1 ? 1 : p;
+
+    var at = len * p;
+    var a = ghost.getPointAtLength(at);
+    /* Направление берём по касательной; у самого конца смотрим назад,
+       иначе обе точки совпадут и машинка развернётся поперёк. */
+    var back = at + 2 > len;
+    var b = ghost.getPointAtLength(back ? at - 2 : at + 2);
+    var ang = Math.atan2(
+      back ? a.y - b.y : b.y - a.y,
+      back ? a.x - b.x : b.x - a.x
+    ) * 180 / Math.PI;
+    car.setAttribute('transform',
+      'translate(' + a.x.toFixed(1) + ',' + a.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(1.3)');
+    trail.style.strokeDashoffset = (len * (1 - p)).toFixed(1);
+  }
 
   var tick = false;
-  var run = function () {
-    tick = false;
-    if (window.innerWidth < 760) {
-      grid.style.removeProperty('--rec-s');
-      grid.style.removeProperty('--rec-y');
-      grid.style.removeProperty('--rec-o');
-      return;
-    }
-    var vh = window.innerHeight;
-    var from = Math.max(hero.offsetHeight - vh * 0.96, 0);
-    var to = Math.max(hero.offsetHeight - vh * 0.08, from + 1);
-    var p = Math.min(Math.max((window.scrollY - from) / (to - from), 0), 1);
-    grid.style.setProperty('--rec-s', (1 - 0.038 * p).toFixed(4));
-    grid.style.setProperty('--rec-y', (-14.4 * p).toFixed(1) + 'px');
-    grid.style.setProperty('--rec-o', (1 - 0.32 * p).toFixed(3));
-  };
   var onScroll = function () {
-    if (!tick) { tick = true; requestAnimationFrame(run); }
+    if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; place(); }); }
   };
+
+  build();
+  window.addEventListener('load', build);
+  window.addEventListener('resize', build, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  run();
 })();
